@@ -1,7 +1,6 @@
 ERL_INCLUDE_PATH=$(shell erl -eval 'io:format("~s~n", [lists:concat([code:root_dir(), "/erts-", erlang:system_info(version), "/include"])])' -s init stop -noshell)
 
 UNAME := $(shell uname)
-LIBEXT := so
 
 ifeq ($(UNAME), Darwin)
 	CC := clang
@@ -17,6 +16,8 @@ ifeq ($(findstring MINGW,$(UNAME)),MINGW)
 	CC := gcc
 	CFLAGS := -shared -D_POSIX_C_SOURCE=199309L
 	LIBEXT := dll
+else
+	LIBEXT := so
 endif
 
 all: priv/decoder.$(LIBEXT)
