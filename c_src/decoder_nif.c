@@ -136,7 +136,7 @@ void get_current_monotic_time(struct timespec* timestamp) {
   timestamp->tv_sec = mach_timestamp.tv_sec;
   timestamp->tv_nsec = mach_timestamp.tv_nsec;
 #else
-  clock_gettime(CLOCK_MONOTONIC, timestamp);
+  clock_gettime(CLOCK_MONOTONIC_RAW, timestamp);
 #endif
 }
 
