@@ -1,5 +1,6 @@
 #include <stddef.h>
 #include <stdint.h>
+#define _POSIX_C_SOURCE 199309L
 
 typedef enum {
     UNDEFINED,
