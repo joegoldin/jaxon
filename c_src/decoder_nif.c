@@ -118,7 +118,7 @@ inline double timespec_to_ms(struct timespec *t) {
 
 void get_current_monotic_time(struct timespec* timestamp) {
 /* clock_gettime is only supported from OS X 10.12 (Sierra) */
-#if defined(_MSC_VER) || defined(__MSYS__) || defined(__MINGW32__) || defined(__MINGW64__)
+#if _MSC_VER
   timespec_get(timestamp, TIME_UTC);
 #elif __MACH__ && __MAC_OS_X_VERSION_MIN_REQUIRED < 101200
   static clock_serv_t clock_server;
@@ -136,7 +136,7 @@ void get_current_monotic_time(struct timespec* timestamp) {
   timestamp->tv_sec = mach_timestamp.tv_sec;
   timestamp->tv_nsec = mach_timestamp.tv_nsec;
 #else
-  clock_gettime(CLOCK_MONOTONIC_RAW, timestamp);
+  clock_gettime(CLOCK_MONOTONIC, timestamp);
 #endif
 }
 
