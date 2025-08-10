@@ -29,7 +29,13 @@ defmodule Jaxon.MixProject do
 
   defp make_makefile() do
     case :os.type() do
-      {:win32, _} -> "Makefile.win"
+      {:win32, osname} ->
+        case System.get_env("MSYSTEM") do
+          "MINGW32" <> _ -> "Makefile"
+          "MINGW64" <> _ -> "Makefile"
+          "MSYS" <> _ -> "Makefile"
+          _ -> "Makefile.win"
+        end
       _ -> "Makefile"
     end
   end
