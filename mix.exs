@@ -8,6 +8,7 @@ defmodule Jaxon.MixProject do
       version: "2.0.8",
       elixir: "~> 1.7",
       compilers: [:elixir_make] ++ Mix.compilers(),
+      make_makefile: make_makefile(),
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       aliases: aliases(),
@@ -24,6 +25,13 @@ defmodule Jaxon.MixProject do
       description: description(),
       package: package()
     ]
+  end
+
+  defp make_makefile() do
+    case :os.type() do
+      {:win32, _} -> "Makefile.win"
+      _ -> "Makefile"
+    end
   end
 
   defp description() do
