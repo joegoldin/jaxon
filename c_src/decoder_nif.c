@@ -9,9 +9,7 @@
 #include <math.h>
 #include <time.h>
 
-#ifndef _MSC_VER
-#include <sys/time.h>
-#endif
+#include <time.h>
 
 #ifdef __MACH__
 #include <mach/clock.h>
