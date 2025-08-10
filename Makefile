@@ -12,6 +12,11 @@ ifeq ($(UNAME), Linux)
 	CFLAGS := -shared -fpic -D_POSIX_C_SOURCE=199309L
 endif
 
+ifeq ($(findstring MINGW,$(UNAME)),MINGW)
+	CC := gcc
+	CFLAGS := -shared -D_POSIX_C_SOURCE=199309L
+endif
+
 all: priv/decoder.so
 
 priv/decoder.so: c_src/decoder_nif.c c_src/decoder.c
